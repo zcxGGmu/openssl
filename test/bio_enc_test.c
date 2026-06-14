@@ -17,7 +17,12 @@
 #define ENCRYPT 1
 #define DECRYPT 0
 
-#define DATA_SIZE 1024
+/*
+ * Keep the payload just over an AES block boundary so the BIO cipher filter
+ * still exercises partial-block finalisation, while avoiding test-sized data
+ * that turns this correctness check into a large AES microbenchmark.
+ */
+#define DATA_SIZE 257
 #define MAX_IV 32
 #define BUF_SIZE (DATA_SIZE + MAX_IV)
 
